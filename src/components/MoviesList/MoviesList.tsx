@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC } from 'react';
 import { MovieInfo, MovieMutation } from '../../types.d';
 import MoviesItem from './MoviesItem/MoviesItem';
 
@@ -8,7 +8,7 @@ interface MoviesListProps {
   onDelete: (_: number) => void;
 }
 
-const MoviesList: FC<MoviesListProps> = memo(({ list, onUpdate, onDelete }) => {
+const MoviesList: FC<MoviesListProps> = ({ list, onUpdate, onDelete }) => {
   return (
     <div>
       <h3 className='mb-3'>Watch list:</h3>
@@ -25,6 +25,6 @@ const MoviesList: FC<MoviesListProps> = memo(({ list, onUpdate, onDelete }) => {
       )}
     </div>
   );
-});
+};
 
 export default MoviesList;
