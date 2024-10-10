@@ -10,10 +10,6 @@ const Jokes = () => {
     addJoke();
   }, []);
 
-  const clearJokes = () => {
-    setList([]);
-  };
-
   const addJoke = () => {
     try {
       getJoke().then((blob) => setList((list) => [...list, { id: blob.id, salt: blob.value }]));
@@ -24,11 +20,11 @@ const Jokes = () => {
 
   const getJokes = () => {
     try {
-      clearJokes();
+      const promises = Array.from({ length: 5 }, (_, i) => i).map(() => getJoke());
 
-      for (let i = 0; i < 5; i++) {
-        addJoke();
-      }
+      Promise.all(promises).then((blobs) => {
+        setList(blobs.map((x) => ({ id: x.id, salt: x.value })));
+      });
     } catch {
       alert("I'm so not funny.");
     }
